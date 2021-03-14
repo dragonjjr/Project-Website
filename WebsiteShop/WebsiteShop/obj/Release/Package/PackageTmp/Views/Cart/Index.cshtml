@@ -1,0 +1,268 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/HeaderHome.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/cart.css">
+
+<!--cart-->
+<div class="container-fluid cart">
+    <div id="div_giohang">
+        <div class="row">
+            <!--Left Side Bar-->
+            <div class="padding col-lg-3">
+                <div class="wrapper d-flex">
+                    <div class="sidebar">
+                        <div class="text-muted pl-3">CUSTOMER INFOMATION</div>
+                    </div>
+                </div>
+            </div>
+            <!--End of Left Side Bar-->
+            <div class="padding col-lg-6">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2 class="text-center">CART</h2>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table table-borderless table-shopping-cart">
+                            <thead class="text-muted">
+                                <tr class="small text-uppercase">
+                                    <th scope="col"></th>
+                                    <th scope="col" width=37%>Product</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--load danh sách giỏ hàng-->
+                                @{ int i = 0;}
+                                @foreach (var item in ViewData["infocart"] as IEnumerable<WebsiteShop.Models.InfoDetail>)
+                                {
+                                    string total = ((float)(@item.product.price * @item.cart.amount)).ToString();
+
+                                    <tr id="tr_@item.product.productID">
+                                        <td>
+                                            <div class="custom-control custom-checkbox" style="padding-top:35px ;">
+                                                <input type="checkbox" class="custom-control-input" id="check_@i">
+                                                <input type="hidden" id="IDprod_@i" name="idProd" value=" @item.product.productID">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="itemside align-items-center">
+                                                <a href="/detailproduct/index/@item.product.productID">
+                                                    <div class="info">
+                                                        <img src="@item.product.image" alt="#" style="width:100px;height:100px;">
+                                                    </div>
+                                                    <div class="info">
+                                                        @item.product.productName
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-right d-none d-md-block">
+                                                <input class="form-control product-quantity" type="number" onchange="changeTotal('@i')" id="quantity_@i" name="quantity" min="1" max="99" value="@item.cart.amount">
+                                            </div>
+                                        </td>
+                                        <td style="padding-top:45px ;">
+                                            <span id="price_@i">@item.product.price</span>.$
+                                        </td>
+
+                                        <td style="padding-top:45px ;" id="total_@i">
+                                            @total.$
+                                        </td>
+                                        <td style="padding-top:35px ;">
+                                            <div class="btn btn-danger" type="submit" onclick="deleteProduct('@item.product.productID','@item.product.productName')"><i class="fa fa-trash">X</i></div>
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-12" style="padding-top: 25px;">
+                    <div class="section-title">
+                        <h2 class="text-center">THE ORDER</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table table-borderless table-shopping-cart">
+                            <div class="col-12" style=" padding: 15px 20px;">
+                                <label for="InputFullName">Full Name</label>
+                                <input type="text" class="form-control" id="FullName" name="InputFullName" required="required">
+                                <label for="InputPhone">Phone Number</label>
+                                <input type="number" class="form-control" id="Phone" name="InputPhone" placeholder="0123456789" required="required">
+                                <label for="InputAddress">Delivery Address</label>
+                                <input type="text" class="form-control" id="Address" required="required">
+                                <div class="btn btn-primary" onclick="order('@ViewBag.countProd')">ORDER</div>
+                            </div>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--Right Side Bar-->
+            <div class="padding col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="/homepage/index" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+            <!--End of Right Side Bar-->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function order(countProd) {
+        var flag = false;
+        //check user choose product to buy
+        for (var i = 0; i < parseInt(countProd); i++) {
+            var strId = "check_" + i;
+            if (document.getElementById(strId).checked)
+            {
+                flag = true;
+                break;
+            }
+        }
+
+        if (flag == false) {
+            alert("You dont choose product to buy");
+        }
+        else {
+            var name = $('#FullName').val();
+            var phone = $('#Phone').val();
+            var address = $('#Address').val();
+
+            var form = new FormData();
+            form.append("name", name);
+            form.append("phone", phone);
+            form.append("address", address);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", domain + '/ordersuccess/SaveOrder', true);
+
+            //lưu thông tin đơn hàng
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var r = xhr.responseText;
+                    var json = JSON.parse(r);
+                    //check json
+                    if (json.Data.status == "OK") {
+                        //load and notice
+                        //lưu thông tin chi tiết đơn hàng
+                        for (var i = 0; i < parseInt(countProd); i++) {
+                            //kiểm tra nếu có chọn
+                            var strId = "check_" + i;
+                            if (document.getElementById(strId).checked == true) {
+                                var idProd = $('#IDprod_' + i).val();
+                                var amount = $('#quantity_' + i).val();
+
+                                var form1 = new FormData();
+
+                                form1.append("idProd", idProd);
+                                form1.append("amount", amount);
+                                form1.append("idOrder", json.Data.idOrder);
+
+                                var xhr1 = new XMLHttpRequest();
+                                xhr1.open("POST", domain + '/ordersuccess/SaveDetailOrder', true);
+
+                                xhr1.onreadystatechange = function () {
+                                    if (xhr1.readyState == 4 && xhr1.status == 200) {
+                                        var r = xhr1.responseText;
+                                        var json = JSON.parse(r);
+                                        //check json
+                                        if (json.Data.status == "OK") { }
+                                        else {
+                                            alert('Error !!!');
+                                        }
+                                    }
+                                }
+                                xhr1.send(form1);
+                            } else {
+                                alert('Error !!!');
+                            }
+                        }
+                        alert('Order succesfull');
+                        window.location = '/ordersuccess/index/' + json.Data.idOrder;
+                    }
+                    else {
+                        alert('Error !!!');
+                    }
+                }
+            }
+            xhr.send(form);
+        }
+       
+    }
+
+
+    function deleteProduct(idProduct, name) {
+        if (confirm('Are you sure deleted this product' + name + ' ?')) {
+            var form = new FormData();
+        form.append("idPro", idProduct);
+        form.append("email", '@ViewBag.email');
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", domain + '/cart/deleteProd', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var r = xhr.responseText;
+                var json = JSON.parse(r);
+                //check json
+                if (json.Data.status == "OK") {
+                    //load and notice
+                    alert('deleted product');
+                    $('#tr_' + idProduct).remove();
+
+                } else {
+                    alert('Error !!!');
+                }
+            }
+        }
+        xhr.send(form);
+        }
+
+    }
+
+    function changeTotal(index) {
+
+        //change amount in database
+        var idProd = $('#IDprod_' + index).val();
+        var amount = $('#quantity_' + index).val();
+
+        var form = new FormData();
+
+        form.append("idPro", idProd);
+        form.append("email", '@ViewBag.email');
+        form.append("amount", amount);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", domain + '/cart/changeCart', true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var r = xhr.responseText;
+                var json = JSON.parse(r);
+                //check json
+                if (json.Data.status == "OK") {
+
+                    var price = $('#price_' + index).html();
+                    total = price * amount;
+                    $('#total_' + index).html(total + '.$');
+
+                } else {
+                    alert('Error !!!');
+                }
+            }
+        }
+        xhr.send(form);
+        }
+</script>
+

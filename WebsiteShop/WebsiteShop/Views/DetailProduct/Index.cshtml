@@ -1,0 +1,201 @@
+﻿@model WebsiteShop.Models.DetailsProduct
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/HeaderHome.cshtml";
+}
+
+<!-- link to images slider css-->
+<link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- link to product/cart css and cart.js-->
+<link rel="stylesheet" href="~/Content/product.css">
+<link rel="stylesheet" href="~/Content/cart.css">
+
+<script src=""></script>
+<!-- product page-->
+
+<div class="container-fluid product mt-2 mb-3">
+    <div class="row no-gutters">
+        <!-- product images-->
+        <div class="col-md-5 pr-2">
+            <div class="card">
+                <div class="product-img">
+                    <ul id="lightSlider">
+                        <li data-thumb=""> <img class="single-product-img" src=@Model.product.image alt="#" /> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- all product description-->
+        <div class="col-md-7">
+            <div class="card">
+                <div class="product-about">
+                    <span class="product-name">@Model.product.productName</span>
+                </div>
+                <div class="product-description">
+                    <!-- time post product-->
+                    <p>Price: $.@Model.product.price</p>
+                    <p>Posting date: @Model.product.postingDate</p>
+                    <hr>
+                    <!--product description-->
+                    <div class="mt-2">
+                        <span class="font-weight-bold product-description">Description</span>
+                        <p>@Model.product.description</p>
+
+                    </div>
+                </div>
+
+                <!--all buttons-->
+
+                <div>
+                    <div class="quantity">
+                        <label for="quantity">Quantity :</label>
+                        <input class="form-control product-quantity" type="number" id="quantity" name="quantity" min="1" max="99" value="1">
+                    </div>
+
+                    <div id="btnaddCart" onclick="addCart()" class="btn btn-primary">Add to Cart</div>
+                    &nbsp;
+                    <div id="btnBuy" onclick="buyNow()" class="btn btn-primary">Buy it Now</div>
+                    <!--kiểm tra nếu sản phẩm này user đã thích-->
+                    <!--<a href="product.php?maSp=<?php echo $maSanPham;?>"><button class="btn btn-light wishlist" onclick="unlikeFavoriteProduct('<?php echo $_SESSION['userEmail'];?>','<?php echo $maSanPham;?>')"> <i class="fa fa-heart"><div class="whishlist-count"><span><?php echo $sanPham['soLuotThich']?></span></div></i> </button></a>
+
+                    <a href="product.php?maSp=<?php echo $maSanPham;?>"><button class="btn btn-light wishlist" onclick="addFavoriteProduct('<?php echo $_SESSION['userEmail'];?>','<?php echo $maSanPham;?>')"> <i class="fa fa-heart-o"><div class="whishlist-count"><span><?php echo $sanPham['soLuotThich']?></span></div></i> </button></a>-->
+                </div>
+            </div>
+
+            <!-- product review section-->
+            <div class="card mt-2 review-section">
+                <h4>Reviews</h4>
+                <hr>
+                <!-- user comment-->
+                <div class="comment-section">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex flex-row align-items-center">
+                            <div class="d-flex flex-column ml-1 comment-profile">
+                                <span class="username">Customer</span>
+                                <div class="d-flex flex-row align-items-center"> <i class="fa fa-calendar-check-o"></i> <span class="ml-1">2/2/2021</span> </div>       
+                                <span class="user-comment">Hàng ngon, chính hãng, nên mua, mình mua hẳn 10 chiếc tặng người thân ahihi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="comments">
+                        @for (int i = 0; i < Model.Comments.Count; i++)
+                        {
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row align-items-center">
+                                    <div class="d-flex flex-column ml-1 comment-profile">
+                                        <span class="username">@Model.Comments[i].email</span>
+                                        <div class="d-flex flex-row align-items-center"> <i class="fa fa-calendar-check-o"></i> <span class="ml-1">@Model.Comments[i].datePost</span> </div>
+                                        <span class="user-comment">@Model.Comments[i].C_content</span>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <hr>
+                    <!-- leave review section-->
+
+                    <div class="form-group">
+                        <h4>Leave Your Review</h4>
+                        <label for="textarea">
+                        </label>
+                        <textarea class="form-control" id="comment" rows="4" name="comment" required></textarea>
+
+                        <div id="btnSend" onclick="addComment()" class="btn btn-primary">Send</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--end of product page-->
+<!--link to image slider js-->
+
+
+<script>
+
+
+
+    function addComment() {
+        //check logged ?
+        if ('@ViewBag.email' == '') {
+            window.location='/login/index';
+        }
+        else {
+            var email = '@ViewBag.email';
+            var idPro = '@Model.product.productID';
+            var content = $('#comment').val();
+
+            //ajax
+            var form = new FormData();
+            form.append("email", email);
+            form.append("idPro", idPro);
+            form.append("content", content);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", domain + '/DetailProduct/addComment', true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var r = xhr.responseText;
+                    var json = JSON.parse(r);
+                    //check json
+                    if (json.Data.status == "OK") {
+                        //load new commnet by ajax
+                        var comment =
+                            '<div class="d-flex justify-content-between align-items-center"><div class="d-flex flex-row align-items-center"><div class="d-flex flex-column ml-1 comment-profile"><span class="username">' + '@ViewBag.email' + '</span><div class="d-flex flex-row align-items-center"> <i class="fa fa-calendar-check-o"></i> <span class="ml-1">' + json.Data.date + '</span> </div><span class="user-comment">' + content + '</span><hr></div></div></div>'
+                        $('#comments').append(comment);
+
+                    } else {
+                        alert('Cannot comment !!!');
+                    }
+                }
+            }
+            xhr.send(form);
+        }
+    }
+
+    function addCart() {
+         //check logged ?
+        if ('@ViewBag.email' == '') {
+            window.location = '/login/index';
+        }
+        else {
+            var email = '@ViewBag.email';
+            var idPro = '@Model.product.productID';
+            var amount = $('#quantity').val();
+
+            //ajax xml
+            var form = new FormData();
+            form.append("email", email);
+            form.append("idPro", idPro);
+            form.append("amount", amount);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", domain + '/Cart/addProduct', true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var r = xhr.responseText;
+                    var json = JSON.parse(r);
+                    //check json
+                    if (json.Data.status == "OK") {
+                        //load and notice
+                        alert('Added to your cart');
+
+                    } else {
+                        alert('Error !!!');
+                    }
+                }
+            }
+            xhr.send(form);
+        }
+    }
+
+</script>
+

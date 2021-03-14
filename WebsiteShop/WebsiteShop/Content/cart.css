@@ -1,0 +1,196 @@
+/*===================================*/
+.container-fluid .row .padding{
+    padding-left: 0;
+}
+/*=============Left Side Bar CSS===========*/
+
+.wrapper {
+    position: relative;
+    margin-top: 0;
+}
+
+.sidebar {
+    position: relative;
+    width: 100%;
+    min-height: 290px;
+    background: #ffffffe0;
+    font-size: 16px;
+    
+}
+
+.payment-method{
+    width: 100%;
+}
+
+
+.text-muted {
+    color: #adb5bd !important
+}
+
+.sidebar ul li {
+    padding: 15px
+}
+
+.sidebar ul .active{
+    background-color:#33AEFF
+}
+
+.sidebar ul li a {
+    color: rgb(0, 0, 0);
+    display: block;
+}
+
+.sidebar ul li a .fa {
+    width: 30px;
+    color: #bdb8d7 !important
+}
+
+.sidebar ul li:hover {
+    background:  #9dd0f1
+}
+
+.sidebar ul li a:hover {
+    text-decoration: none
+}
+/*===================================*/
+/*=============Middle and Right Bar CSS===========*/
+
+.card-body {
+    padding: 1.40rem
+}
+
+.img-sm {
+    width: 80px;
+    height: 80px
+}
+
+.itemside .info {
+    padding-left: 15px;
+    padding-right: 7px;
+}
+
+
+.table-shopping-cart .price-wrap {
+    line-height: 1.2
+}
+.table-shopping-cart .product-quantity {
+    padding-top: 20px;
+}
+
+.table-shopping-cart .price {
+    font-weight: bold;
+    margin-right: 5px;
+    display: block;
+    padding-top: 25px;
+}
+
+.table-shopping-cart .remove-button {
+    padding-top: 20px;
+}
+
+.text-muted {
+    color: #969696 !important
+}
+
+a {
+    text-decoration: none !important
+}
+
+.card {
+    position: relative;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 0px
+}
+
+.itemside {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%
+}
+
+.dlist-align {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.price {
+    font-weight: 600;
+    color: #212529
+}
+
+
+.btn-main {
+    border-radius: 2px;
+    text-transform: capitalize;
+    font-size: 15px;
+    padding: 10px 19px;
+    cursor: pointer;
+    color: #fff;
+    width: 100%
+}
+
+.btn-light.red {
+    color: #ffffff;
+    background-color: #F44336;
+    border-color: #f8f9fa;
+    font-size: 12px
+}
+.btn-light.green {
+    color: #ffffff;
+    background-color: #007Bff;
+    border-color: #f8f9fa;
+    font-size: 12px
+}
+.btn-light.green:hover {
+    color: #ffffff;
+    background-color: #007Bff;
+    border-color: #007Bff;
+}
+
+.btn-light:hover {
+    color: #ffffff;
+    background-color: #F44336;
+    border-color: #F44336
+}
+
+/*===================================*/
+/*Reponsive*/
+@media screen and (max-width: 1000px) {
+    .container-fluid{
+        padding-top: 0;
+    }
+    .sidebar {
+        min-height: auto;
+        text-align: center;
+    }
+    .payment{
+        display: none;
+    }
+
+}
+/*===================================*/
+/*==========BILLING ADDRESS CSS=======*/
+.container-fluid .row .title{
+    font-size: 16px;
+}
+.form-billing{
+    padding: 1.5rem 2rem;
+}
+.single-card{
+
+    padding-bottom: 1rem;
+}
+/*============ADMIN CSS================*/
+.container-fluid.cart ul.admin li{
+    font-size: 13px;
+} 

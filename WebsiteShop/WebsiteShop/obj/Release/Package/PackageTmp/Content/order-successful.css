@@ -1,0 +1,79 @@
+.order-table {
+    width: 100%;
+    font-size: 16px;
+    background-color: #eeeeee;
+
+}
+
+.order-table .container .main-table {
+    width: 100%;
+    max-width: 600px;
+}
+
+.order-table .container .main-table .order-confirm {
+    padding: 35px;
+    background-color: #ffffff;
+}
+
+.order-table .container .main-table .order-confirm table {
+    width: 100%;
+    max-width: 600px;
+}
+
+.order-table .container .main-table .order-confirm table tr td {
+    padding-top: 25px;
+}
+
+.order-table .container .main-table .order-confirm .second-row td {
+    padding-left: 25px;
+}
+
+.order-table .container .main-table .bot-row td {
+    padding-left: 28px;
+    padding-bottom: 10px;
+    background-color: #ffffff;
+    font-size: 0;
+
+}
+
+.order-table .container .main-table .bot-row table div {
+    display: inline-block;
+    max-width: 50%;
+    min-width: 240px;
+    vertical-align: top;
+    width: 100%;
+
+}
+
+.order-table .container .main-table .bot-banner td {
+    padding: 15px;
+    background-color: #ff7361;
+}
+
+.order-table .container .main-table .bot-banner h2 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 30px;
+    color: #ffffff;
+    margin: 0;
+
+}
+
+.order-table .container .main-table .bot-banner .banner-button tr td {
+    border-radius: 5px;
+}
+
+.order-table .container .main-table .bot-banner .banner-button tr td a {
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: #F44336;
+    padding: 10px 30px;
+    border: 1px solid #F44336;
+    display: block;
+}
+
+.order-table .container .main-table .bot-banner .banner-button tr td a:hover {
+    background-color: #f71100;
+
+}

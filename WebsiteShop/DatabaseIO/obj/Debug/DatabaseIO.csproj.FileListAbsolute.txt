@@ -1,0 +1,15 @@
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\bin\Debug\DatabaseIO.dll.config
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\bin\Debug\DatabaseIO.dll
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\bin\Debug\DatabaseIO.pdb
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\bin\Debug\DatabaseProvider.dll
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\bin\Debug\EntityFramework.dll
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\bin\Debug\DatabaseProvider.pdb
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\bin\Debug\DatabaseProvider.dll.config
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\bin\Debug\EntityFramework.xml
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\obj\Debug\DatabaseIO.csprojAssemblyReference.cache
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\obj\Debug\DatabaseIO.csproj.CoreCompileInputs.cache
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\obj\Debug\DatabaseIO.csproj.CopyComplete
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\obj\Debug\DatabaseIO.dll
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseIO\obj\Debug\DatabaseIO.pdb

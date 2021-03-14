@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@ViewBag.error
+<h2>Login</h2>
+<input type="text" id="txtEmail" placeholder="Email" class="form-control" /><br />
+<input type="password" id="txtPwd" placeholder="Password" class="form-control" /><br />
+<p id="ms" style="color:red"></p>
+<div id="btnLogin" onclick="Login()" class="btn btn-primary">Login</div><br /><br />
+<a href="/forgotpassword/index">Forgot Password?</a><br />
+<a href="/register/index">Don't have an account? </a>
+
+<script type="text/javascript">
+
+    var isRunning = false; //tránh nhấn nhiều lần
+    function Login() {
+        if (!isRunning) {
+            isRunning = true;
+            var email = $('#txtEmail').val();
+            var pwd = $('#txtPwd').val();
+
+            if (email == '' || pwd == '') {
+                $('#ms').html('Please enter email and password !!!');
+                isRunning = false;
+            }
+            else {
+                var form = new FormData();
+                form.append("email", email);
+                form.append("pwd", pwd);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', domain + '/Login/CheckLogin', true);
+
+                //kiểm tra timeout
+                xhr.timeout = 30000;//30s
+                xhr.ontimeout = function () {
+                    $('#ms').html('Can not connect to server, please F5 to reload page !!!');
+                    isRunning = false;
+                }
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var r = xhr.responseText;
+                        var json = JSON.parse(r);
+                        //check json
+                        if (json.Data.status == "OK") {
+                            window.location = '/HomePage/index';
+                        } else {
+                            $('#ms').html('Email or password is error !!!');
+                        }
+                        isRunning = false;
+                    }
+                }
+                xhr.send(form);
+            }
+        }
+    }
+</script>

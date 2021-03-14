@@ -1,0 +1,134 @@
+﻿@model DatabaseProvider.Orders
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/HeaderHome.cshtml";
+}
+<link rel="stylesheet" href="~/Content/order-successful.css">
+<table class="order-table">
+    <tr>
+        <td class="container" align="center">
+            <table class="main-table">
+                <tr class="top-row">
+                    <td class="order-confirm">
+                        <table>
+                            <!--------------------THANK YOU---------------->
+                            <tr class="first-row">
+                                <td align="center">
+                                    <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" />
+                                    <h2> Thank You For Your Order! </h2>
+                                </td>
+                            </tr>
+                            <!--------------------END THANK YOU---------------->
+                            <!--------------------ORDER CONFIRMATION---------------->
+                            <tr class="second-row">
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td width="75%"> <strong>Order Confirmation</strong> </td>
+                                            <td width="25%"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="75%"> Purchased Item (@ViewBag.amount) </td>
+                                            <td width="25%"> @ViewBag.total.$ </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="75%"> Shipping </td>
+                                            <td width="25%"> $0 </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="75%"> Sales Tax </td>
+                                            <td width="25%"> $0 </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="75%"> <strong>TOTAL </strong> </td>
+                                            <td width="25%"> <strong> @ViewBag.total.$ </strong></td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                            </tr>
+
+                            <!--------------------END ORDER CONFIRMATION---------------->
+                        </table>
+                    </td>
+                </tr>
+                <!--------------------ORDER INFO---------------->
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <p><strong>Your Name</strong></p>
+                                                    <p>@Model.name</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div>
+                                        <table >
+                                            <tr>
+                                                <td>
+                                                    <p><strong>Your Phone</strong></p>
+                                                    <p>@Model.numPhone</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <p><strong>Delivery Address</strong></p>
+                                                    <p>@Model.DeliAddress</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <p><strong>Estimated Delivery Date</strong></p>
+                                                    <p>@Model.deliveryDate</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!--------------------END ORDER INFO---------------->
+                <!--------------------BANNER---------------->
+                <tr class="bot-banner">
+                    <td align="center">
+                        <table style="max-width:600px;">
+                            <tr>
+                                <td>
+                                    <h2> Get 15% off your next order. </h2>
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td style="padding: 25px 0 15px 0;">
+                                    <table class="banner-button">
+                                        <tr>
+                                            <td>
+                                                <a href="/homepage/index">Shop Again</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!--------------------END BANNER---------------->
+            </table>
+        </td>
+    </tr>
+</table>

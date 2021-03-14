@@ -1,0 +1,11 @@
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseProvider\bin\Debug\DatabaseProvider.dll.config
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseProvider\bin\Debug\DatabaseProvider.dll
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseProvider\bin\Debug\DatabaseProvider.pdb
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseProvider\bin\Debug\EntityFramework.dll
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseProvider\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseProvider\bin\Debug\EntityFramework.xml
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseProvider\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseProvider\obj\Debug\DatabaseProvider.csproj.CoreCompileInputs.cache
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseProvider\obj\Debug\DatabaseProvider.csproj.CopyComplete
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseProvider\obj\Debug\DatabaseProvider.dll
+C:\Users\HP\Documents\Visual Studio 2017\WebsiteShop\DatabaseProvider\obj\Debug\DatabaseProvider.pdb

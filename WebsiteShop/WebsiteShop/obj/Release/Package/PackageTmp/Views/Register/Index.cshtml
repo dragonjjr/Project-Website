@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Register</h2><br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5">
+                <div class="card-img-left d-none d-md-flex">
+                    <!--background image here, set in CSS -->
+                </div>
+                <div class="card-body">
+                    <p id="msSucss" style="color:green"></p>
+                    <label for="email">Email</label>
+                    <div class="form-label-group">
+                        <input type="email" id="email" name="email" class="form-control" placeholder="MaiLong@gmail.com" required>
+                    </div><br />
+
+                    <label for="inputPassword">Password</label>
+                    <div class="form-label-group">
+                        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+                    </div><br />
+
+                    <label for="inputPassword2">Confirm password</label>
+                    <div class="form-label-group">
+                        <input type="password" id="inputPassword2" name="password" class="form-control" placeholder="Confirm password" required>
+                    </div><br />
+
+                    <label for="nameUser">Full name</label>
+                    <div class="form-label-group">
+                        <input type="text" id="nameUser" name="nameUser" class="form-control" placeholder="Luka moder" required>
+                    </div><br />
+
+                    <label for="address">Address</label>
+                    <div class="form-label-group">
+                        <input type="text" name="address" id="address" class="form-control" placeholder="New york city" required>
+                    </div>
+                    <br />
+                    <p id="ms" style="color:red"></p>
+                    <div id="btnRegister" onclick="Register()" class="btn btn-primary">Register</div><br /><br />
+                    <a href="/login/index">Already have an account ? Sign In</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function Register() {
+        var email = $('#email').val();
+        var pwd = $('#inputPassword').val();
+        var pwd1 = $('#inputPassword2').val();
+        var name = $('#nameUser').val();
+        var address = $('#address').val();
+
+        if (email == '' || pwd == '' || pwd1 == '' || name == '' || address == '') {
+            $('#ms').html('Please enter enough information !!!');
+        }
+        else {
+            if (pwd != pwd1) {
+                $('#ms').html('Confirm password is not correct !!!');
+            }
+            else {
+                var form = new FormData();
+                form.append("email", email);
+                form.append("pwd", pwd);
+                form.append("name", name);
+                form.append("address", address);
+                //url to verify
+                form.append("url", domain + "/login/index");
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open("POST", domain + '/register/CheckRegister', true);
+
+                //kiểm tra timeout
+                xhr.timeout = 30000;//30s
+                xhr.ontimeout = function () {
+                    $('#ms').html('Can not connect to server, please F5 to reload page !!!');
+                    isRunning = false;
+                }
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var r = xhr.responseText;
+                        var json = JSON.parse(r);
+                        //check json
+                        if (json.Data.status == "OK") {
+                            $('#msSucss').html('Register success, check your email to verify !!');
+                            $('#ms').html('');
+                        } else {
+                            $('#ms').html('Cannot register account !!!');
+                        }
+                        isRunning = false;
+                    }
+                }
+
+                xhr.send(form);
+            }
+        }
+    }
+
+</script>
+
