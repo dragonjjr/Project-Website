@@ -14,11 +14,6 @@ namespace WebsiteShop
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "HomePage", action = "Index", id = UrlParameter.Optional }
-            );
-            routes.MapRoute(
                name: "resetpwd",
                url: "ResetPwd/index/{email}/{code}",
                defaults: new { controller = "ResetPwd", action = "Index" }
@@ -47,6 +42,11 @@ namespace WebsiteShop
             url: "ordersuccess/index/{idOrder}",
             defaults: new { controller = "OrderSuccess", action = "Index" }
         );
+             routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "HomePage", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }
